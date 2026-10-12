@@ -1,0 +1,37 @@
+{
+  "domain": "segway_cube",
+  "name": "Segway Cube",
+  "after_dependencies": [
+    "esphome"
+  ],
+  "bluetooth": [
+    {
+      "manufacturer_id": 16974,
+      "manufacturer_data_start": [
+        208
+      ],
+      "connectable": true
+    },
+    {
+      "manufacturer_id": 20034,
+      "manufacturer_data_start": [
+        208
+      ],
+      "connectable": true
+    }
+  ],
+  "codeowners": [
+    "@nlemeshko"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "bluetooth",
+    "bluetooth_adapters"
+  ],
+  "documentation": "https://github.com/nlemeshko/ha-segway-cube-integration",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/nlemeshko/ha-segway-cube-integration/issues",
+  "requirements": [],
+  "version": "0.4.0"
+}

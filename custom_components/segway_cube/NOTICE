@@ -1,0 +1,16 @@
+segway-ninebot-ble-cli
+Copyright 2026 NootNooot
+
+This is an unofficial, independently developed implementation created
+through reverse engineering for interoperability purposes. It is not
+affiliated with, authorized by, endorsed by, or sponsored by Segway Inc.,
+Ninebot, or any related entity. "Segway" and "Ninebot" are trademarks of
+their respective owners and are used here only to identify the hardware
+this software interoperates with.
+
+Protocol metadata researched from segway-ninebot-ble and segway-ninebot-ble-app
+(Copyright 2026 NootNooot, Apache-2.0). Crypto primitives adapted from
+segway-ninebot-ble-cli, using cryptography instead of PyCryptodome.
+
+Brand assets: original portable-power-station illustration created for this project.
+The SVG source and rendered PNG assets are distributed under Apache-2.0.

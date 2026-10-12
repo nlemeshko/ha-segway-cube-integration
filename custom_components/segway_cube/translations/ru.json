@@ -1,0 +1,152 @@
+{
+  "title": "Segway Cube",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Подключить Segway Cube",
+        "description": "Создайте Bluetooth-ключ здесь и подтвердите привязку кнопкой станции. Терминал не нужен. Закройте Segway-Ninebot на телефоне. Если ключ уже есть, введите его; при перенастройке пустое поле сохраняет текущий ключ. Последняя проверка: {serial}, протокол {profile}.",
+        "data": {
+          "mac": "Bluetooth MAC-адрес",
+          "ble_name": "Bluetooth-имя (резервное)",
+          "password": "Bluetooth-ключ Segway (необязательно)",
+          "protocol_profile": "Профиль протокола",
+          "pair": "Создать ключ с подтверждением на станции"
+        }
+      },
+      "confirm_pairing": {
+        "title": "Новая Bluetooth-привязка",
+        "description": "Новый ключ может заменить ключ приложения Segway на iPhone. Интеграция сохранит ключ автоматически. На следующем экране дождитесь запроса, затем коротко нажмите кнопку питания станции один раз — не удерживайте её. На подтверждение будет 60 секунд. Если предыдущая настройка прервалась, сначала проверяется сохранённый ключ.",
+        "data": {
+          "confirm": "Разрешаю привязку и возможную замену ключа приложения"
+        }
+      }
+    },
+    "error": {
+      "invalid_address": "Enter a Bluetooth MAC address (AA:BB:CC:DD:EE:FF).",
+      "invalid_password": "Enter a 16-byte password as 32 hexadecimal characters.",
+      "password_required": "Ключ не принят. Введите правильный Bluetooth-ключ или оставьте поле пустым и выберите создание ключа с кнопкой.",
+      "pairing_required": "Привязка не подтверждена за 60 секунд. Повторите настройку и коротко нажмите кнопку питания при запросе.",
+      "cannot_connect": "Не удалось подключиться. Закройте приложение Segway и проверьте активный proxy и уровень сигнала.",
+      "confirmation_required": "Подтвердите новую привязку или закройте настройку.",
+      "key_storage_failed": "Не удалось сохранить Bluetooth-ключ в Home Assistant. Проверьте доступ к хранилищу."
+    },
+    "abort": {
+      "not_cube": "This device is not a Segway Cube.",
+      "already_configured": "This Cube is already configured.",
+      "reauth_successful": "Bluetooth credentials updated.",
+      "reconfigure_successful": "Cube configuration updated."
+    },
+    "progress": {
+      "connecting": "Подключаюсь к Cube и проверяю Bluetooth-ключ…",
+      "pairing": "Коротко нажмите кнопку питания Cube один раз. Не удерживайте её. Ожидаю подтверждения станции (до 60 секунд)…"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Настройки Segway Cube",
+        "description": "Переключатели и списки настроек Cube доступны на странице устройства. Здесь можно включить дополнительное экспериментальное действие записи скалярных регистров. Режимы подсветки без подтверждённых значений используют исходные единицы. Cube подключается только через выбранный адаптер; при его недоступности ждёт восстановления. Автоматический режим выбирает путь средствами Home Assistant.",
+        "data": {
+          "scan_interval": "Интервал показаний (секунды)",
+          "detail_interval": "Интервал всех регистров (секунды)",
+          "allow_control": "Включить экспериментальное управление",
+          "bluetooth_source": "Bluetooth proxy / адаптер (жёсткая привязка)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Заряд батареи"
+      },
+      "temperature": {
+        "name": "Температура"
+      },
+      "battery_modules": {
+        "name": "Батарейные модули"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "Выход AC"
+      },
+      "dc_output": {
+        "name": "Выход DC"
+      },
+      "r_drive": {
+        "name": "R-Drive"
+      },
+      "ups": {
+        "name": "UPS"
+      },
+      "button_tone": {
+        "name": "Звук кнопок"
+      }
+    },
+    "select": {
+      "ac_charge_limit": {
+        "name": "Мощность зарядки AC"
+      },
+      "fan_mode": {
+        "name": "Режим вентилятора",
+        "state": {
+          "active_cooling": "Активное охлаждение",
+          "silent": "Тихий"
+        }
+      },
+      "ac_standby": {
+        "name": "Отключение AC без нагрузки",
+        "state": {
+          "never": "Никогда",
+          "15_minutes": "15 минут",
+          "30_minutes": "30 минут",
+          "1_hour": "1 час",
+          "2_hours": "2 часа",
+          "6_hours": "6 часов",
+          "12_hours": "12 часов",
+          "24_hours": "24 часа"
+        }
+      },
+      "dc_standby": {
+        "name": "Отключение DC без нагрузки",
+        "state": {
+          "never": "Никогда",
+          "15_minutes": "15 минут",
+          "30_minutes": "30 минут",
+          "1_hour": "1 час",
+          "2_hours": "2 часа",
+          "6_hours": "6 часов",
+          "12_hours": "12 часов",
+          "24_hours": "24 часа"
+        }
+      },
+      "device_standby": {
+        "name": "Отключение станции без нагрузки",
+        "state": {
+          "never": "Никогда",
+          "15_minutes": "15 минут",
+          "30_minutes": "30 минут",
+          "1_hour": "1 час",
+          "2_hours": "2 часа",
+          "6_hours": "6 часов",
+          "12_hours": "12 часов",
+          "24_hours": "24 часа"
+        }
+      },
+      "screen_timeout": {
+        "name": "Таймер экрана",
+        "state": {
+          "always_on": "Постоянно включён",
+          "1_minute": "1 минута",
+          "5_minutes": "5 минут",
+          "15_minutes": "15 минут",
+          "30_minutes": "30 минут"
+        }
+      },
+      "ac_frequency": {
+        "name": "Частота AC"
+      }
+    }
+  }
+}

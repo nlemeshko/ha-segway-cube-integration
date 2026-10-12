@@ -1,0 +1,32 @@
+set_setting:
+  name: Set experimental scalar setting
+  description: Write a documented scalar register and verify readback. Enable experimental control first. Values are raw device units. Packed output flags, resets and firmware writes are excluded.
+  fields:
+    entry_id:
+      name: Cube integration entry
+      required: true
+      selector:
+        config_entry:
+          integration: segway_cube
+    setting:
+      name: Setting
+      required: true
+      selector:
+        select:
+          options:
+            - rACInputPowerLimit
+            - rACStandbyTime
+            - rDCStandbyTime
+            - rDeviceStandbyTime
+            - rScreenDisplayTime
+            - rLedMode
+            - rAtmosphereMode
+            - rRhythmMode
+    value:
+      name: Raw value
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 65535
+          mode: box

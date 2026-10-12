@@ -1,0 +1,152 @@
+{
+  "title": "Segway Cube",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect Segway Cube",
+        "description": "Create a Bluetooth key here and confirm with the station button. Close Segway-Ninebot on your phone. If you already have a key, enter it; leaving it empty during reconfiguration keeps the current key. Last probe: {serial}, protocol {profile}.",
+        "data": {
+          "mac": "Bluetooth MAC address",
+          "ble_name": "Bluetooth device name (fallback)",
+          "password": "Segway BLE password (optional)",
+          "protocol_profile": "Protocol profile",
+          "pair": "Create a key with button confirmation"
+        }
+      },
+      "confirm_pairing": {
+        "title": "New Bluetooth binding",
+        "description": "A new key may replace the key used by the Segway phone app. The integration saves it automatically. On the next screen, wait for the prompt, then briefly press the station power button once; do not hold it. You have 60 seconds. If a previous setup was interrupted, its saved key is checked first.",
+        "data": {
+          "confirm": "Allow binding and possible replacement of the phone app key"
+        }
+      }
+    },
+    "error": {
+      "invalid_address": "Enter a Bluetooth MAC address (AA:BB:CC:DD:EE:FF).",
+      "invalid_password": "Enter a 16-byte password as 32 hexadecimal characters.",
+      "password_required": "Key not accepted. Enter the correct Bluetooth key, or leave it empty and select button pairing.",
+      "pairing_required": "Binding was not confirmed within 60 seconds. Retry and briefly press the power button when prompted.",
+      "cannot_connect": "Could not connect. Close the Segway app and check the station, active proxy and Bluetooth range.",
+      "confirmation_required": "Confirm the new binding or close setup.",
+      "key_storage_failed": "Could not save the Bluetooth key in Home Assistant. Check storage access."
+    },
+    "abort": {
+      "not_cube": "This device is not a Segway Cube.",
+      "already_configured": "This Cube is already configured.",
+      "reauth_successful": "Bluetooth credentials updated.",
+      "reconfigure_successful": "Cube configuration updated."
+    },
+    "progress": {
+      "connecting": "Connecting to Cube and checking its Bluetooth credentials…",
+      "pairing": "Briefly press the Cube power button once. Do not hold it. Waiting for station confirmation (up to 60 seconds)…"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Segway Cube settings",
+        "description": "Cube switches and setting selectors are available on the device page. The extra experimental action writes scalar registers; unverified lighting modes still use raw values.Cube connects only through the selected adapter and waits if it is unavailable. Automatic mode lets Home Assistant choose the route.",
+        "data": {
+          "scan_interval": "Telemetry interval (seconds)",
+          "detail_interval": "Full register interval (seconds)",
+          "allow_control": "Enable experimental scalar control",
+          "bluetooth_source": "Bluetooth proxy / adapter (strict binding)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Battery charge"
+      },
+      "temperature": {
+        "name": "Temperature"
+      },
+      "battery_modules": {
+        "name": "Battery modules"
+      }
+    },
+    "switch": {
+      "ac_output": {
+        "name": "AC output"
+      },
+      "dc_output": {
+        "name": "DC output"
+      },
+      "r_drive": {
+        "name": "R-Drive"
+      },
+      "ups": {
+        "name": "UPS"
+      },
+      "button_tone": {
+        "name": "Button tone"
+      }
+    },
+    "select": {
+      "ac_charge_limit": {
+        "name": "AC charging power limit"
+      },
+      "fan_mode": {
+        "name": "Fan mode",
+        "state": {
+          "active_cooling": "Active cooling",
+          "silent": "Silent"
+        }
+      },
+      "ac_standby": {
+        "name": "AC idle timeout",
+        "state": {
+          "never": "Never",
+          "15_minutes": "15 minutes",
+          "30_minutes": "30 minutes",
+          "1_hour": "1 hour",
+          "2_hours": "2 hours",
+          "6_hours": "6 hours",
+          "12_hours": "12 hours",
+          "24_hours": "24 hours"
+        }
+      },
+      "dc_standby": {
+        "name": "DC idle timeout",
+        "state": {
+          "never": "Never",
+          "15_minutes": "15 minutes",
+          "30_minutes": "30 minutes",
+          "1_hour": "1 hour",
+          "2_hours": "2 hours",
+          "6_hours": "6 hours",
+          "12_hours": "12 hours",
+          "24_hours": "24 hours"
+        }
+      },
+      "device_standby": {
+        "name": "Device idle timeout",
+        "state": {
+          "never": "Never",
+          "15_minutes": "15 minutes",
+          "30_minutes": "30 minutes",
+          "1_hour": "1 hour",
+          "2_hours": "2 hours",
+          "6_hours": "6 hours",
+          "12_hours": "12 hours",
+          "24_hours": "24 hours"
+        }
+      },
+      "screen_timeout": {
+        "name": "Screen timeout",
+        "state": {
+          "always_on": "Always on",
+          "1_minute": "1 minute",
+          "5_minutes": "5 minutes",
+          "15_minutes": "15 minutes",
+          "30_minutes": "30 minutes"
+        }
+      },
+      "ac_frequency": {
+        "name": "AC output frequency"
+      }
+    }
+  }
+}

@@ -1,0 +1,471 @@
+[
+  {
+    "key": "rSocTemp",
+    "board": 6,
+    "index": 50,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rCapacity",
+    "board": 6,
+    "index": 51,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rInputPower",
+    "board": 6,
+    "index": 48,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rOutputPower",
+    "board": 6,
+    "index": 49,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rRemainTime",
+    "board": 6,
+    "index": 52,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBool",
+    "board": 6,
+    "index": 41,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rOutputInfo",
+    "board": 6,
+    "index": 63,
+    "length": 32,
+    "module": "mcu"
+  },
+  {
+    "key": "rFunBool",
+    "board": 6,
+    "index": 192,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rErrorCode",
+    "board": 6,
+    "index": 39,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rWarnCode",
+    "board": 6,
+    "index": 40,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rFunSupBool",
+    "board": 6,
+    "index": 43,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rFrequencySwitchValue",
+    "board": 6,
+    "index": 210,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rFunBool2",
+    "board": 6,
+    "index": 193,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rACInputPowerLimit",
+    "board": 6,
+    "index": 208,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rACStandbyTime",
+    "board": 6,
+    "index": 212,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rDCStandbyTime",
+    "board": 6,
+    "index": 213,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rDeviceStandbyTime",
+    "board": 6,
+    "index": 211,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rScreenDisplayTime",
+    "board": 6,
+    "index": 220,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rLedMode",
+    "board": 6,
+    "index": 221,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rAtmosphereMode",
+    "board": 6,
+    "index": 222,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rAtmosphereColor1",
+    "board": 6,
+    "index": 223,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rAtmosphereColor2",
+    "board": 6,
+    "index": 224,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rAtmosphereColor3",
+    "board": 6,
+    "index": 225,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rAtmosphereColor4",
+    "board": 6,
+    "index": 226,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rRhythmMode",
+    "board": 6,
+    "index": 227,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rRhythmColor1",
+    "board": 6,
+    "index": 228,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rRhythmColor2",
+    "board": 6,
+    "index": 229,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rRhythmColor3",
+    "board": 6,
+    "index": 230,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rRhythmColor4",
+    "board": 6,
+    "index": 231,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rSN",
+    "board": 6,
+    "index": 32,
+    "length": 14,
+    "module": "mcu"
+  },
+  {
+    "key": "rTemp",
+    "board": 6,
+    "index": 171,
+    "length": 10,
+    "module": "mcu"
+  },
+  {
+    "key": "rMcuV",
+    "board": 6,
+    "index": 23,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rMcuPn",
+    "board": 6,
+    "index": 16,
+    "length": 14,
+    "module": "mcu"
+  },
+  {
+    "key": "rBleV",
+    "board": 6,
+    "index": 178,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBlePn",
+    "board": 18,
+    "index": 16,
+    "length": 14,
+    "module": "ble"
+  },
+  {
+    "key": "rPvV",
+    "board": 6,
+    "index": 179,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rPvPn",
+    "board": 21,
+    "index": 16,
+    "length": 14,
+    "module": "pv"
+  },
+  {
+    "key": "rInvpV",
+    "board": 6,
+    "index": 180,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rInvpPn",
+    "board": 22,
+    "index": 2,
+    "length": 14,
+    "module": "invp"
+  },
+  {
+    "key": "rInvsV",
+    "board": 6,
+    "index": 181,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rInvsPn",
+    "board": 17,
+    "index": 2,
+    "length": 14,
+    "module": "invs"
+  },
+  {
+    "key": "rBmsCount",
+    "board": 6,
+    "index": 170,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBms1V",
+    "board": 6,
+    "index": 182,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBms1Pn",
+    "board": 65,
+    "index": 16,
+    "length": 14,
+    "module": "bms1"
+  },
+  {
+    "key": "rBms2V",
+    "board": 6,
+    "index": 183,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBms2Pn",
+    "board": 66,
+    "index": 16,
+    "length": 14,
+    "module": "bms2"
+  },
+  {
+    "key": "rBms3V",
+    "board": 6,
+    "index": 184,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBms3Pn",
+    "board": 67,
+    "index": 16,
+    "length": 14,
+    "module": "bms3"
+  },
+  {
+    "key": "rBms4V",
+    "board": 6,
+    "index": 185,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBms4Pn",
+    "board": 68,
+    "index": 16,
+    "length": 14,
+    "module": "bms4"
+  },
+  {
+    "key": "rBms5V",
+    "board": 6,
+    "index": 186,
+    "length": 2,
+    "module": "mcu"
+  },
+  {
+    "key": "rBms5Pn",
+    "board": 69,
+    "index": 16,
+    "length": 14,
+    "module": "bms5"
+  },
+  {
+    "key": "rCPUId",
+    "board": 6,
+    "index": 24,
+    "length": 12,
+    "module": "mcu"
+  },
+  {
+    "key": "rBattery1Info",
+    "board": 65,
+    "index": 49,
+    "length": 12,
+    "module": "bms1"
+  },
+  {
+    "key": "rBattery2Info",
+    "board": 66,
+    "index": 49,
+    "length": 12,
+    "module": "bms2"
+  },
+  {
+    "key": "rBattery3Info",
+    "board": 67,
+    "index": 49,
+    "length": 12,
+    "module": "bms3"
+  },
+  {
+    "key": "rBattery4Info",
+    "board": 68,
+    "index": 49,
+    "length": 12,
+    "module": "bms4"
+  },
+  {
+    "key": "rBattery5Info",
+    "board": 69,
+    "index": 49,
+    "length": 12,
+    "module": "bms5"
+  },
+  {
+    "key": "rBmsMoreInfo",
+    "board": 65,
+    "index": 139,
+    "length": 2,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsRemainCapacity",
+    "board": 65,
+    "index": 138,
+    "length": 2,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsManufactureDate",
+    "board": 65,
+    "index": 32,
+    "length": 2,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsEnergyThroughput",
+    "board": 65,
+    "index": 128,
+    "length": 4,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsCapacityThroughput",
+    "board": 65,
+    "index": 130,
+    "length": 4,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsCycleCount",
+    "board": 65,
+    "index": 27,
+    "length": 2,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsDeepDischargeCount",
+    "board": 65,
+    "index": 39,
+    "length": 2,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsExtremeUseTime",
+    "board": 65,
+    "index": 136,
+    "length": 4,
+    "module": "bms1"
+  },
+  {
+    "key": "rBmsExtremeChargeTime",
+    "board": 65,
+    "index": 134,
+    "length": 4,
+    "module": "bms1"
+  }
+]

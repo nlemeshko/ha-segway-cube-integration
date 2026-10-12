@@ -7,6 +7,8 @@ bluetooth-auto-recovery==1.6.4
 bluetooth-data-tools==1.29.24
 dbus-fast==5.0.22; sys_platform == "linux"
 habluetooth==7.1.2
+aiousbwatcher==1.1.2; sys_platform == "linux"
+serialx==1.11.0
 pytest==9.1.1
 pytest-asyncio==1.4.0
 ruff==0.17.0

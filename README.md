@@ -2,7 +2,9 @@
 
 ![Project icon](custom_components/segway_cube/brand/icon.png)
 
-[Русская документация](README.ru.md) · **0.4.0 — public beta candidate**
+[![Validate](https://github.com/nlemeshko/ha-segway-cube-integration/actions/workflows/validate.yml/badge.svg)](https://github.com/nlemeshko/ha-segway-cube-integration/actions/workflows/validate.yml)
+
+[Русская документация](README.ru.md) · **0.4.0 — public beta**
 
 An unofficial local Bluetooth integration for Segway Cube portable power stations.
 Designed for Cube 1000/2000; tested on one physical Cube with three battery modules.
@@ -42,7 +44,7 @@ if it keeps occupying the BLE connection, temporarily disable phone Bluetooth.
 
 ### HACS custom repository
 
-After the repository is published, add
+Add
 `https://github.com/nlemeshko/ha-segway-cube-integration` to **HACS → Custom
 repositories**, selecting **Integration**. Download **Segway Cube**, restart
 Home Assistant and follow the setup steps below.
@@ -99,7 +101,7 @@ the raw 16-bit register value. Prefer the normal entities; see
 
 ## Beta validation and limitations
 
-The integration has 76 automated tests. On hardware, authorization, telemetry and
+The integration has 78 automated tests. On hardware, authorization, telemetry and
 proxy pinning succeeded; charging-limit and button-tone changes were read back and
 restored. These results come from one station, not a broad compatibility matrix.
 
@@ -120,8 +122,7 @@ python -m pytest tests -q
 python -m ruff check .
 ```
 
-The GitHub workflow runs tests, Ruff, hassfest and HACS validation. Hosted checks
-must pass after upload; their configuration alone is not proof of a successful run.
+The GitHub workflow runs tests, Ruff, hassfest and HACS validation. Current hosted results are available from the validation badge above.
 Report issues with your model, firmware, HA/integration versions and proxy details
 via [GitHub Issues](https://github.com/nlemeshko/ha-segway-cube-integration/issues).
 Review diagnostics before uploading: keys and serial numbers are omitted, but

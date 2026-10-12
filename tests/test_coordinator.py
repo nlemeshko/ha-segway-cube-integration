@@ -19,7 +19,7 @@ def coordinator_for(session):
     coordinator.raw = {}
     coordinator.failures = {}
     coordinator.battery_count = None
-    coordinator.last_detail = 0.0
+    coordinator.last_detail = None
     coordinator.poll_count = 0
     coordinator._detail_pending = []
     coordinator.data = None
@@ -38,12 +38,14 @@ async def test_startup_succeeds_without_optional_registers_or_battery_count():
     coordinator = coordinator_for(Station())
     data = await coordinator._async_update_data()
     assert data == {"rInputPower": 2, "rOutputPower": 0, "rSocTemp": 8292}
-    assert coordinator.last_detail == 0
+    assert coordinator.last_detail is None
     assert coordinator.failures.keys() == {"rBmsCount"}
 
 
 @pytest.mark.parametrize("count_raw, count", [(b"\x02\x00", 2), (b"\x03\x03", 3), (b"\x03\x04", None)])
-async def test_full_catalogue_is_polled_after_startup_and_missing_batteries_are_skipped(count_raw, count):
+async def test_full_catalogue_is_polled_after_startup_and_missing_batteries_are_skipped(count_raw, count, monkeypatch):
+    # A newly booted Linux runner has less uptime than the detail interval.
+    monkeypatch.setattr("cube_test.coordinator.time", SimpleNamespace(monotonic=lambda: 1.0))
     reads = []
     by_address = {(r.board, r.index): r for r in REGISTERS}
 
@@ -71,7 +73,7 @@ async def test_full_catalogue_is_polled_after_startup_and_missing_batteries_are_
     else:
         # Unknown packed fields must never make us hide a possible battery.
         assert "rBattery5Info" in data
-    assert coordinator.last_detail > 0
+    assert coordinator.last_detail == 1.0
 
 
 async def test_link_drop_preserves_current_values_and_retries_unread_detail():
@@ -90,4 +92,33 @@ async def test_link_drop_preserves_current_values_and_retries_unread_detail():
     assert data["rInputPower"] == 0
     assert "rFunBool2" not in data
     assert coordinator._detail_pending
-    assert coordinator.last_detail == 0
+    assert coordinator.last_detail is None
+
+
+@pytest.mark.parametrize("start_time", [0.0, 1.0])
+async def test_detail_interval_starts_after_completed_cycle_even_at_boot(start_time, monkeypatch):
+    now = [start_time]
+    monkeypatch.setattr("cube_test.coordinator.time", SimpleNamespace(monotonic=lambda: now[0]))
+    reads = []
+    by_address = {(r.board, r.index): r for r in REGISTERS}
+
+    class Station:
+        async def read(self, board, index, length):
+            reads.append(by_address[board, index])
+            return bytes(length)
+
+    coordinator = coordinator_for(Station())
+    coordinator.data = await coordinator._async_update_data()
+    assert not any(not r.dynamic for r in reads)
+    coordinator.data = await coordinator._async_update_data()
+    while coordinator._detail_pending:
+        coordinator.data = await coordinator._async_update_data()
+    assert coordinator.last_detail == start_time
+    reads.clear()
+    now[0] += 299
+    coordinator.data = await coordinator._async_update_data()
+    assert not any(not r.dynamic for r in reads)
+    reads.clear()
+    now[0] += 1
+    coordinator.data = await coordinator._async_update_data()
+    assert any(r.key == "rFunSupBool" for r in reads)

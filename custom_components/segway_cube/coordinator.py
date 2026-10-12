@@ -36,7 +36,7 @@ class CubeCoordinator(DataUpdateCoordinator):
         self.raw = {}
         self.failures = {}
         self.battery_count = None
-        self.last_detail = 0.0
+        self.last_detail = None
         self.poll_count = 0
         self._detail_pending = []
 
@@ -51,7 +51,7 @@ class CubeCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         async with self.lock:
             initial = self.poll_count == 0
-            due = time.monotonic() - self.last_detail >= self.config_entry.options.get(
+            due = self.last_detail is None or time.monotonic() - self.last_detail >= self.config_entry.options.get(
                 "detail_interval", DEFAULT_DETAIL_INTERVAL
             )
             if not initial and not self._detail_pending and due:

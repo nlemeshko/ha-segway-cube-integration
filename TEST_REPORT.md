@@ -16,7 +16,7 @@ and an active ESPHome Bluetooth proxy:
 
 ## Automated validation
 
-76 tests cover protocol/crypto vectors, packet integrity and fragmentation,
+78 tests cover protocol/crypto vectors, packet integrity and fragmentation,
 authorization, explicit pairing consent, persisted-key recovery, startup timeout,
 incremental polling, battery-module counts, controls and capability gating,
 readback confirmation, concurrent changes, and strict proxy selection.
@@ -31,10 +31,17 @@ Home Assistant 2026.10.1 development environment. These are not hardware tests.
 - Every timer/fan/R-Drive setting changed on hardware.
 - Other Cube units, regional variants, firmware versions, or different HA versions.
 - Long-duration stability and operation with five battery modules.
-- A fresh Linux dependency installation or the GitHub-hosted validation workflow.
-  HACS and hassfest checks require their first remote run after upload.
 
 Controls are based on the official Cube application's configuration, not guessed
 generic Ninebot commands. Some compound battery/port fields remain raw registers.
 Strict source selection uses an internal habluetooth backend hook; Home Assistant
 updates may require compatibility fixes. Future releases should expand the matrix.
+
+## Hosted validation
+
+The GitHub workflow installs dependencies in a fresh Ubuntu / Python 3.14 environment,
+runs the same tests and Ruff, and separately validates HACS and hassfest metadata.
+The suite explicitly checks immediate detailed polling after startup with a monotonic
+clock of zero or one second, and the interval after a completed detail cycle.
+See the [validation runs](https://github.com/nlemeshko/ha-segway-cube-integration/actions/workflows/validate.yml)
+for current results. Hardware-test limitations above remain unchanged.

@@ -147,10 +147,10 @@ class Session:
                 await on_key(self.serial, password, True)
         self.crypto.set_key(password, auth)
         await self.send(build_frame(BLE_BOARD, 0x5D, 0, serial, self.sync))
-        try:
-            result = await self.receive(BLE_BOARD, 0x5D, timeout=8)
-        except (TimeoutError, ProtocolError) as err:
-            raise PasswordRequired("Bluetooth password was not accepted") from err
+        # A missing or corrupt reply does not prove that the key is invalid.
+        # Keep transport errors retryable; only an intact negative reply may
+        # request reauthentication (which stops HA's periodic polling).
+        result = await self.receive(BLE_BOARD, 0x5D, timeout=8)
         if result.index != 1:
             raise PasswordRequired("Bluetooth password was rejected")
         self.password = password

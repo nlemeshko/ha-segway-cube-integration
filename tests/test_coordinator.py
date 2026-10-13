@@ -1,10 +1,15 @@
 import asyncio
 from contextlib import asynccontextmanager
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 import pytest
+from cube_test.client import Session
 from cube_test.coordinator import CubeCoordinator
+from cube_test.protocol import PasswordRequired, ProtocolError
 from cube_test.registers import REGISTERS
+from homeassistant.exceptions import ConfigEntryAuthFailed, HomeAssistantError
+from homeassistant.helpers.update_coordinator import UpdateFailed
 
 
 def coordinator_for(session):
@@ -24,6 +29,65 @@ def coordinator_for(session):
     coordinator._detail_pending = []
     coordinator.data = None
     return coordinator
+
+
+@pytest.mark.parametrize("error", [TimeoutError(), ProtocolError("Response integrity check failed")])
+async def test_authentication_transport_failure_recovers_on_next_poll_with_same_key(error):
+    key = bytes(range(16))
+    sessions = []
+
+    @asynccontextmanager
+    async def connection():
+        # Every connection uses a fresh encryption session and the saved key.
+        s = Session(AsyncMock(), "write", "notify", "gen2")
+        s.send = AsyncMock()
+        s.receive = AsyncMock(side_effect=error) if not sessions else AsyncMock(
+            return_value=SimpleNamespace(index=1)
+        )
+        s.read = AsyncMock(side_effect=lambda board, index, length: bytes(length))
+        sessions.append(s)
+        await s.authenticate(bytes(16), bytes(14), key, pair=False)
+        yield s
+
+    coordinator = coordinator_for(None)
+    coordinator.client.session = connection
+    with pytest.raises(UpdateFailed):
+        await coordinator._async_update_data()
+    assert coordinator.poll_count == 0
+    coordinator.data = await coordinator._async_update_data()
+    assert coordinator.data["rInputPower"] == 0
+    assert coordinator.poll_count == 1
+    assert sessions[1].password == key
+
+
+async def test_explicit_key_rejection_still_requests_reauthentication():
+    @asynccontextmanager
+    async def connection():
+        raise PasswordRequired("Bluetooth password was rejected")
+        yield
+
+    coordinator = coordinator_for(None)
+    coordinator.client.session = connection
+    with pytest.raises(ConfigEntryAuthFailed, match="rejected"):
+        await coordinator._async_update_data()
+
+
+@pytest.mark.parametrize("error", [TimeoutError(), ProtocolError("Response integrity check failed")])
+async def test_control_authentication_transport_failure_does_not_start_reauth(error):
+    @asynccontextmanager
+    async def connection():
+        s = Session(AsyncMock(), "write", "notify", "gen2")
+        s.send = AsyncMock()
+        s.receive = AsyncMock(side_effect=error)
+        await s.authenticate(bytes(16), bytes(14), bytes(range(16)), pair=False)
+        yield s
+
+    coordinator = coordinator_for(None)
+    coordinator.client.session = connection
+    coordinator.config_entry.async_start_reauth = AsyncMock()
+    with pytest.raises(HomeAssistantError):
+        await coordinator.set_control("button_tone", True)
+    coordinator.config_entry.async_start_reauth.assert_not_called()
 
 
 async def test_startup_succeeds_without_optional_registers_or_battery_count():

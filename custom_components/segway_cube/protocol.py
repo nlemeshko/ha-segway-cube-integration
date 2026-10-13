@@ -12,7 +12,7 @@ class ProtocolError(Exception):
 
 
 class PasswordRequired(ProtocolError):
-    """Station already has a password; reuse the official app's key."""
+    """Station requires a missing key or explicitly rejected the supplied key."""
 
 
 class PairingRequired(ProtocolError):

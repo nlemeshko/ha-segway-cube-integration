@@ -33,5 +33,5 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/nlemeshko/ha-segway-cube-integration/issues",
   "requirements": [],
-  "version": "0.4.0"
+  "version": "0.4.1"
 }

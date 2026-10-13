@@ -73,6 +73,12 @@ the next attempt can recover the same key. Never publish this file or your HA ba
 Reconfiguration with an empty key field and key creation disabled preserves the current key.
 Rebinding from the official application may require updating the HA key.
 
+From 0.4.1, a timeout or corrupt Bluetooth reply during authentication is treated
+as a temporary connection failure. Polling continues with the saved key; only a
+missing key or an explicit rejection requests reauthentication. If 0.4.0 already
+stopped polling with an "authentication expired" issue, restart Home Assistant
+once after installing the update to load the fix and resume polling.
+
 An optional local helper can retrieve a candidate key from an unencrypted iPhone backup
 or exported Segway preferences plist. It reads only the Segway preferences and sends
 nothing to a server; see [the Russian guide](README.ru.md#дополнительный-способ-bluetooth-ключ-из-iphone)

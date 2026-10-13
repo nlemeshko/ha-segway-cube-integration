@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 — authentication recovery
+
+- Treat missing or corrupt Bluetooth authentication replies as temporary connection
+  failures, so Home Assistant keeps polling with the saved key and can recover.
+- Request reauthentication only when a key is missing or the station explicitly
+  rejects it; do not replace the saved key on a transport failure.
+- Add regression coverage for recovery on the next poll, control failures without
+  spurious reauthentication, and explicit key rejection (87 automated tests total).
+
 ## 0.4.0 — first public beta
 
 - Local encrypted Bluetooth telemetry through Home Assistant and active ESPHome proxies.

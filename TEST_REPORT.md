@@ -1,4 +1,4 @@
-# Validation scope — Segway Cube 0.4.0
+# Validation scope — Segway Cube 0.4.1
 
 ## Hardware validation
 
@@ -13,15 +13,23 @@ and an active ESPHome Bluetooth proxy:
   700 W to 600 W and restored; button tone was enabled and restored to disabled.
   Readback confirmed both changes and preservation of unrelated flag bits.
 - Button-confirmed pairing and telemetry were exercised directly from a Mac.
+- The 0.4.1 authentication fix was installed on the same Home Assistant instance
+  on 2026-10-13. After one restart, the saved key authenticated successfully,
+  the reauthentication issue disappeared, and five consecutive polls completed
+  without register failures. Recovery from synthetic authentication transport
+  failures is covered by tests; long-duration hardware stability remains unverified.
 
 ## Automated validation
 
-78 tests cover protocol/crypto vectors, packet integrity and fragmentation,
+87 tests cover protocol/crypto vectors, packet integrity and fragmentation,
 authorization, explicit pairing consent, persisted-key recovery, startup timeout,
 incremental polling, battery-module counts, controls and capability gating,
 readback confirmation, concurrent changes, and strict proxy selection.
 The public candidate passes these tests and Ruff using the existing Python 3.14 /
 Home Assistant 2026.10.1 development environment. These are not hardware tests.
+Authentication regressions include a timeout or corrupt reply followed by a
+successful poll using the same saved key, no reauthentication after a transport
+failure during control, and reauthentication after an explicit negative reply.
 
 ## Not yet validated
 

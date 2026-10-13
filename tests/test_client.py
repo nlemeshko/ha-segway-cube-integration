@@ -1,3 +1,4 @@
+from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
 import pytest
@@ -23,6 +24,37 @@ async def test_unbound_station_requires_explicit_pairing():
     with pytest.raises(PairingRequired):
         await s.authenticate(bytes(16), bytes(14), None, pair=False)
     s.client.write_gatt_char.assert_not_called()
+
+
+@pytest.mark.parametrize("error", [TimeoutError(), ProtocolError("Response integrity check failed")])
+async def test_authentication_transport_failure_does_not_reject_saved_key(error):
+    s = session()
+    s.send = AsyncMock()
+    s.receive = AsyncMock(side_effect=error)
+    with pytest.raises(type(error)) as raised:
+        await s.authenticate(bytes(16), bytes(14), bytes(range(16)), pair=False)
+    assert raised.value is error
+    assert not isinstance(raised.value, PasswordRequired)
+    assert s.password is None
+    assert s.send.await_count == 1
+
+
+async def test_explicit_authentication_rejection_still_requires_password():
+    s = session()
+    s.send = AsyncMock()
+    s.receive = AsyncMock(return_value=SimpleNamespace(index=0))
+    with pytest.raises(PasswordRequired, match="rejected"):
+        await s.authenticate(bytes(16), bytes(14), bytes(range(16)), pair=False)
+    assert s.password is None
+
+
+async def test_saved_key_is_used_after_successful_authentication():
+    s = session()
+    s.send = AsyncMock()
+    s.receive = AsyncMock(return_value=SimpleNamespace(index=1))
+    key = bytes(range(16))
+    await s.authenticate(bytes(16), bytes(14), key, pair=False)
+    assert s.password == key
 
 
 async def test_long_writes_are_fragmented_for_proxy_att_limit():
